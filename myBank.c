@@ -34,7 +34,7 @@ void checkBalance(int account_number)
 void deposit(int account_number, double amount)
 {
     accounts[account_number][BANK_BALANCE] += floor(100 * amount) / 100;
-    printf("New balance of your account is: %f\n", accounts[account_number][BANK_BALANCE]);
+    printf("The new balance is: %0.2lf\n", accounts[account_number][BANK_BALANCE]);
 }
 
 
@@ -44,11 +44,11 @@ void withdraw(int account_number, double amount)
     if (accounts[account_number][BANK_BALANCE] >= amount)
     {
         accounts[account_number][BANK_BALANCE] -= floor(100 * amount) / 100;
-        printf("New balance of your account is: %f\n", accounts[account_number][BANK_BALANCE]);
+        printf("The new balance is: %0.2lf\n", accounts[account_number][BANK_BALANCE]);
     }
     else
     {
-        printf("You don't have enough money\n");
+        printf("Cannot withdraw more than the balance");
     }
 }
 
@@ -58,7 +58,7 @@ void closeAccount(int account_number)
 {
     accounts[account_number][BANK_STATUS] = BANK_STATUS_CLOSED;
     accounts[account_number][BANK_BALANCE] = 0;
-    printf("The account is closed\n");
+    printf("Closed account number %d \n",account_number);
 }
 
 
@@ -83,7 +83,7 @@ void printAccounts()
     {
         if (accounts[i][BANK_STATUS] == BANK_STATUS_OPEN)
         {
-            printf("Account number: %d, Balance is: %lf\n", FIRST_ACCOUNT_NUMBER + i, accounts[i][BANK_BALANCE]);
+            printf("The balance of account number %d is: %0.2lf\n", FIRST_ACCOUNT_NUMBER + i, accounts[i][BANK_BALANCE]);
         }
     }
 }
@@ -107,7 +107,7 @@ int getBankAccountAndCheck(int account_number)
     if (account_number < FIRST_ACCOUNT_NUMBER || account_number > LAST_ACCOUNT_NUMBER)
     {
         printf("Failed to read the account number\n");
-        //printf("Account number must be between %d and %d\n", FIRST_ACCOUNT_NUMBER, LAST_ACCOUNT_NUMBER);
+        
         return -1;
     }
     if (accounts[account_number - FIRST_ACCOUNT_NUMBER][BANK_STATUS] == BANK_STATUS_CLOSED)
@@ -135,6 +135,23 @@ bool isValidAmount(double amount, int scanfVal)
     if (amount < 0 )
     {
         printf("Cannot deposit a negative amount\n");
+        return false;
+    }
+    else
+        return true;
+}
+
+bool isValidInterest(int amount, int scanfVal)
+{
+    if (scanfVal != 1)
+    {
+        printf("Failed to read the interest rate\n");
+        return false;
+    }
+    
+    if (amount < -99 || amount>100 )
+    {
+        printf("Invalid interest rate\n");
         return false;
     }
     else

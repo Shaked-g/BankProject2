@@ -19,3 +19,4 @@ void printAccounts();
 void closeBank();
 int getBankAccountAndCheck(int account_number);
 bool isValidAmount(double amount, int scanfVal);
+bool isValidInterest(int amount, int scanfVal);

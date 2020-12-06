@@ -43,12 +43,12 @@ int main(){
         case 'D':
         {
             int account_number;
-            printf("Enter account number: ");
+            printf("Please enter account number: ");
             scanf("%d", &account_number);
 
            if (isalpha(account_number))
            {
-               printf("Invalid account number \n");
+               printf("Failed to read the account number \n");
             break;
            }
             
@@ -57,7 +57,7 @@ int main(){
             if (account_number == -1)
                 break;
             double amount;
-            printf("Enter amount to deposit: \n");
+            printf("Enter amount to deposit: ");
             if (!isValidAmount(amount, scanf("%lf", &amount)))
                 break;
 
@@ -67,13 +67,13 @@ int main(){
         case 'W':
         {
             int account_number;
-            printf("Enter account number:\n");
+            printf("Please enter account number: ");
             scanf("%d", &account_number);
             account_number = getBankAccountAndCheck(account_number);
             if (account_number == -1)
                 break;
             double amount;
-            printf("Enter amount to withdraw: \n");
+            printf("Please enter the amount to withdraw: ");
             if (!isValidAmount(amount, scanf("%lf", &amount)))
                 break;
 
@@ -83,7 +83,7 @@ int main(){
         case 'C':
         {
             int account_number;
-            printf("Enter account number:\n");
+            printf("Please enter account number: ");
             scanf("%d", &account_number);
             account_number = getBankAccountAndCheck(account_number);
             if (account_number == -1)
@@ -95,8 +95,9 @@ int main(){
         case 'I':
         {
             int interest_rate;
-            printf("Enter interest rate: \n");
-            if (!isValidAmount(interest_rate, scanf("%d", &interest_rate)))
+            printf("Please enter interest rate: ");
+            
+            if (!isValidInterest(interest_rate, scanf("%d", &interest_rate)))
                 break;
 
             addInterest(interest_rate);
